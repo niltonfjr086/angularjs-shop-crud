@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <title>ShopApp - Gerência de Produtos</title>
+
+  <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css">
+
+  <script src="../node_modules/angular/angular.min.js"></script>
+  <script src="../node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="../node_modules/angular-aria/angular-aria.min.js"></script>
+  <script src="../node_modules/angular-messages/angular-messages.min.js"></script>
+  <script src="../node_modules/angular-material/angular-material.min.js"></script>
+
+  <script src="../service/MantemProdutoService.js"></script>
+  <script src="../controller/MantemProdutoController.js"></script>
+
+</head>
+
+<body ng-app="ShopApp" ng-controller="MantemProdutoController" ng-cloak layout="column">
+  <md-toolbar>
+    <h3>ShopApp - Gerência de Produtos</h3>
+
+
+  </md-toolbar>
+
+  <div class="container" layout="row" flex>
+    <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
+      <md-list>
+        <md-list-item>
+          <md-button>Products</md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button>Orders</md-button>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+
+
+
+    <md-content id="content" flex>
+
+      <md-grid-list id="comandos-produto" md-cols="12" md-row-height="100px">
+
+        <md-grid-tile md-colspan="3" md-rowspan="1">
+          <md-input-container class="md-block">
+            <label>PRODUTO</label>
+            <input name="p-name" type="text" ng-model="product.name">
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile md-colspan="5" md-rowspan="1">
+          <md-input-container class="md-block">
+            <label>DESCRIÇÃO</label>
+            <input name="p-description" type="text" ng-model="product.description">
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile md-colspan="2" md-rowspan="1">
+          <md-input-container class="md-block">
+            <label>PREÇO</label>
+            <input name="p-price" type="number" ng-model="product.price">
+          </md-input-container>
+        </md-grid-tile>
+
+        <md-grid-tile md-colspan="2" md-rowspan="1">
+          <md-button class="md-accent md-raised" ng-click="saveProduct()">{{product.id? 'Alterar' : '+' }}</md-button>
+        </md-grid-tile>
+
+      </md-grid-list>
+
+
+      <md-grid-list md-cols="12" md-row-height="36px">
+        <md-grid-tile md-colspan="1" md-rowspan="1">ID</md-grid-tile>
+        <md-grid-tile md-colspan="3" md-rowspan="1">PRODUTO</md-grid-tile>
+        <md-grid-tile md-colspan="4" md-rowspan="1">DESCRIÇÃO</md-grid-tile>
+        <md-grid-tile md-colspan="2" md-rowspan="1">PREÇO</md-grid-tile>
+        <md-grid-tile md-colspan="2" md-rowspan="1">Ação</md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list md-cols="12" md-row-height="36px" ng-attr-id="{{ 'object-' + $index }}" ng-repeat="item in products">
+        <md-grid-tile md-colspan="1" md-rowspan="1">{{item.id}}</md-grid-tile>
+        <md-grid-tile md-colspan="3" md-rowspan="1">{{item.name}}</md-grid-tile>
+        <md-grid-tile md-colspan="4" md-rowspan="1">{{item.description}}</md-grid-tile>
+        <md-grid-tile md-colspan="2" md-rowspan="1">{{item.price}}</md-grid-tile>
+
+        <md-grid-tile md-colspan="1" md-rowspan="1">
+          <md-button class="md-raised" ng-click="selectProduct($index)">O</md-button>
+        </md-grid-tile>
+        <md-grid-tile md-colspan="1" md-rowspan="1">
+          <md-button class="md-accent md-raised" ng-click="deleteProduct(item.id)">X</md-button>
+        </md-grid-tile>
+      </md-grid-list>
+
+    </md-content>
+
+  </div>
+
+
+</body>
+
+</html>
